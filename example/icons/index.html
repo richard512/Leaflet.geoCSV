@@ -58,7 +58,7 @@
 			height: 200px;
 			font-family: monospace;
 		}
-		#cargar {
+		#load {
 			margin: 20px 0 0 0;
 			font-size: 1.2em;
 		}
@@ -77,20 +77,24 @@
       <div class="caja">
 		<div id="controles">
 
-			<p>In this example, we load icons and HTML from CSV into the map. We can write full url or relative path. More at <a href="http://leafletjs.com/examples/custom-icons.html">Leaflet documentation</a>.</p>
+			<h2>Functions</h2>			
+			<button id="load">Load data</button>
 
 			<h2>CSV</h2>
 			<textarea id="csv">
-lat;lng;icon;popup
-48.8566;2.3522;http://joker-x.github.io/Leaflet.geoCSV/example/bankia/marcador-bankia.png;<a href="https://es.wikipedia.org/wiki/Par%C3%ADs">París</a>, capital de Francia
-40.4168;-3.7038;red.png;Madrid, capital de España<br><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Bandera_de_Madrid.svg" width="100%" />
-41.9015;12.4608;blue.png;Roma, capital de Italia
-37.9837;23.7293;purple.png;Atenas, capital de Grecia</textarea>
+latitude	longitude	icon	popup
+48.8566	2.3522	http://joker-x.github.io/Leaflet.geoCSV/example/bankia/marcador-bankia.png	<a href="https://es.wikipedia.org/wiki/Par%C3%ADs">París</a>, capital de Francia
+40.4168	-3.7038	red.png	Madrid, capital de España<br><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Bandera_de_Madrid.svg" width="100%" />
+41.9015	12.4608	blue.png	Roma, capital de Italia
+37.9837	23.7293	purple.png	Atenas, capital de Grecia</textarea>
 
 			<h2>Javascript</h2>
 			<textarea id="opciones">
+
+guessedFieldSep = guessDelimiters(document.getElementById('csv').value, ['\t', ';', ','])
+
 L.geoCsv(null,{
-  fieldSeparator: ';',
+  fieldSeparator: guessedFieldSep,
   firstLineTitles: true,
   onEachFeature: function (feature, layer) {
     layer.bindPopup(feature.properties["popup"]);
@@ -107,8 +111,6 @@ L.geoCsv(null,{
     });
   }
 });</textarea>
-
-			<button id="cargar">Load data</button>
 
 		</div>
 		</div>
@@ -141,10 +143,10 @@ L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 18
 }).addTo(mapa);
 
-//dotamos de funcionalidad al botón cargar
+//dotamos de funcionalidad al botón load
 var geo_csv = {};
 
-function cargar() {
+function load() {
   //guardamos los cambios del usuario en sus respectivos textarea
   opciones_editor.save();
   csv_editor.save();
@@ -156,7 +158,28 @@ function cargar() {
   mapa.addLayer(geo_csv);
 }
 
-document.getElementById('cargar').addEventListener('click', cargar, false);
+document.getElementById('load').addEventListener('click', load, false);
+
+function guessDelimiters (text, possibleDelimiters) {
+    return possibleDelimiters.filter(weedOut);
+
+    function weedOut (delimiter) {
+        var cache = -1;
+        return text.split('\n').every(checkLength);
+
+        function checkLength (line) {
+            if (!line) {
+                return true;
+            }
+
+            var length = line.split(delimiter).length;
+            if (cache < 0) {
+                cache = length;
+            }
+            return cache === length && length > 1;
+        }
+    }
+}
 
 </script>
 
