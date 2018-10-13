@@ -26,6 +26,9 @@ L.GeoCSV = L.GeoJSON.extend({
     titles: [],
     latitudeTitle: ["lat", "lt", "latitude"],
     longitudeTitle: ["lng", "ln", "longitude", "long"],
+    colorIconsByColumn: "",
+    colorColumnMin: 9999999999999999999999999999999999999999999999999999999999,
+    colorColumnMax: -999999999999999999999999999999999999999999999999999999999,
     fieldSeparator: ',',
     lineSeparator: '\n',
     deleteDoubleQuotes: true,
@@ -132,11 +135,22 @@ L.GeoCSV = L.GeoJSON.extend({
       }
     }
 
+    var minLat = 0, maxLat = 0, minLng = 0, maxLng = 0;
+
     for (var num_linea = 0; num_linea < csv.length; num_linea++) {
       var fields = csv[num_linea].trim().split(this.options.fieldSeparator)
         , lng = parseFloat(fields[titulos.indexOf(lngTitle)])
         , lat = parseFloat(fields[titulos.indexOf(latTitle)]);
       if (fields.length==titulos.length && lng<180 && lng>-180 && lat<90 && lat>-90) {
+        if (lat < minLat) minLat = lat;
+        if (lat > maxLat) maxLat = lat;
+        if (lng < minLng) minLng = lng;
+        if (lng > maxLng) maxLng = lng;
+        if (this.options.colorIconsByColumn){
+          var colorcolumnnum = parseFloat(fields[titulos.indexOf(this.options.colorIconsByColumn)])
+          if (colorcolumnnum < this.options.colorColumnMin) this.options.colorColumnMin = colorcolumnnum;
+          if (colorcolumnnum > this.options.colorColumnMax) this.options.colorColumnMax = colorcolumnnum;
+        }
         var feature = {};
         feature["type"]="Feature";
         feature["geometry"]={};
@@ -152,6 +166,11 @@ L.GeoCSV = L.GeoJSON.extend({
         json["features"].push(feature);
       } 
     }
+
+    //lat = minLat + ((minLat + maxLat) / 2);
+    //lng = maxLng - ((maxLng - minLng) / 2);
+    //mapa.panTo(new L.LatLng(lat, lng));
+
     return json;
   }
 
