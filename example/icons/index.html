@@ -94,7 +94,11 @@ L.geoCsv(null,{
   fieldSeparator: "\t",
   firstLineTitles: true,
   onEachFeature: function (feature, layer) {
-    layer.bindPopup(feature.properties["popup"]);
+  	popuplines = []
+  	for (i in feature.properties) {
+  		popuplines.push("<b>" + i + "</b>: " + feature.properties[i])
+  	}
+    layer.bindPopup(popuplines.join('<br>'));
   },
   pointToLayer: function (feature, latlng) {
     return L.marker(latlng, {
@@ -105,9 +109,10 @@ L.geoCsv(null,{
         shadowSize:   [41, 41],
         shadowAnchor: [13, 20]
       })
-    });
+    })
   }
-});</textarea>
+});
+</textarea>
 
 		</div>
 		</div>
@@ -134,7 +139,7 @@ function ajusta_Altura() {
 ajusta_Altura();
 
 //instanciamos el mapa
-var mapa = L.map('mapa', {attributionControl:false}).setView([49, 3], 4);
+var mapa = L.map('mapa', {attributionControl:false}).setView([41.9015, 12.4608], 4);
 
 L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 18
