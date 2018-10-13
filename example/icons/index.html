@@ -100,15 +100,19 @@ L.geoCsv(null,{
     layer.bindPopup(popuplines.join('<br>'));
   },
   pointToLayer: function (feature, latlng) {
-    return L.marker(latlng, {
-      icon:L.icon({
-        iconUrl: feature.properties['icon'],
-        shadowUrl: 'shadow.png',
-        iconSize: [25,41],
-        shadowSize:   [41, 41],
-        shadowAnchor: [13, 20]
-      })
-    })
+  	if (feature.properties['icon']){
+	    return L.marker(latlng, {
+	      icon:L.icon({
+	        iconUrl: feature.properties['icon'],
+	        shadowUrl: 'shadow.png',
+	        iconSize: [25,41],
+	        shadowSize:   [41, 41],
+	        shadowAnchor: [13, 20]
+	      })
+	    })
+    } else {
+    	return L.marker(latlng)
+    }
   }
 });
 </textarea>
@@ -140,7 +144,7 @@ ajusta_Altura();
 //instanciamos el mapa
 var mapa = L.map('mapa', {attributionControl:false}).setView([41.9015, 12.4608], 4);
 
-L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+L.tileLayer('../../../../USGSNationalMapSatelliteAndTopo/{z}/{x}/{y}.jpg', {
 	maxZoom: 18
 }).addTo(mapa);
 
