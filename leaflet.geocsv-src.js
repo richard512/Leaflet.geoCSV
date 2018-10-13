@@ -18,18 +18,18 @@
 * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 * MA 02110-1301, USA.
 */
-
+xx = ""
 L.GeoCSV = L.GeoJSON.extend({
 
   //opciones por defecto
   options: {
-    titles: ['lat', 'lng', 'popup'],
-	latitudeTitle: 'lat',
-	longitudeTitle: 'lng',
-    fieldSeparator: ';',
+    titles: [],
+    latitudeTitle: ["lat", "latitude"],
+    longitudeTitle: ["lng", "ln", "long", "longitude"],
+    fieldSeparator: ',',
     lineSeparator: '\n',
     deleteDoubleQuotes: true,
-    firstLineTitles: false
+    firstLineTitles: true
   },
 
   _propertiesNames: [],
@@ -87,18 +87,56 @@ L.GeoCSV = L.GeoJSON.extend({
     return cadena;
   },
 
+  _guessDelimiters: function(text, possibleDelimiters) {
+      return possibleDelimiters.filter(weedOut)[0];
+
+      function weedOut (delimiter) {
+          var cache = -1;
+          return text.split('\n').every(checkLength);
+
+          function checkLength (line) {
+              if (!line) {
+                  return true;
+              }
+
+              var length = line.split(delimiter).length;
+              if (cache < 0) {
+                  cache = length;
+              }
+              return cache === length && length > 1;
+          }
+      }
+  },
+
   _csv2json: function (csv) {
     var json = {};
     json["type"]="FeatureCollection";
     json["features"]=[];
     var titulos = this.options.titles;
 
+    this.options.fieldSeparator = this._guessDelimiters(csv, ['\t', ';', ','])
+    console.log('Guessed delimiter = "' + this.options.fieldSeparator + '"')
     csv = csv.split(this.options.lineSeparator);
+
+    var latTitle = ""
+    for (i in this.options.titles){
+      if (this.options.latitudeTitle.indexOf(this.options.titles[i]) > -1){
+        latTitle = this.options.titles[i]
+      }
+    }
+
+    var lngTitle = ""
+    for (i in this.options.titles){
+      if (this.options.longitudeTitle.indexOf(this.options.titles[i]) > -1){
+        lngTitle = this.options.titles[i]
+      }
+    }
+
     for (var num_linea = 0; num_linea < csv.length; num_linea++) {
-      var campos = csv[num_linea].trim().split(this.options.fieldSeparator)
-        , lng = parseFloat(campos[titulos.indexOf(this.options.longitudeTitle)])
-        , lat = parseFloat(campos[titulos.indexOf(this.options.latitudeTitle)]);
-      if (campos.length==titulos.length && lng<180 && lng>-180 && lat<90 && lat>-90) {
+      var fields = csv[num_linea].trim().split(this.options.fieldSeparator)
+        , lng = parseFloat(fields[titulos.indexOf(lngTitle)])
+        , lat = parseFloat(fields[titulos.indexOf(latTitle)]);
+      if (fields.length==titulos.length && lng<180 && lng>-180 && lat<90 && lat>-90) {
         var feature = {};
         feature["type"]="Feature";
         feature["geometry"]={};
@@ -107,8 +145,8 @@ L.GeoCSV = L.GeoJSON.extend({
         feature["geometry"]["coordinates"]=[lng,lat];
         //propiedades
         for (var i=0; i<titulos.length; i++) {
-          if (titulos[i] != this.options.latitudeTitle && titulos[i] != this.options.longitudeTitle) {
-            feature["properties"][this._propertiesNames[i]] = this._deleteDoubleQuotes(campos[i]);
+          if (titulos[i] != latTitle && titulos[i] != lngTitle) {
+            feature["properties"][this._propertiesNames[i]] = this._deleteDoubleQuotes(fields[i]);
           }
         }
         json["features"].push(feature);
