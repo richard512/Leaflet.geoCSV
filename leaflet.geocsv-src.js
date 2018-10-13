@@ -113,6 +113,45 @@ L.GeoCSV = L.GeoJSON.extend({
     return cadena;
   },
 
+  _GetCenterFromDegrees: function (data)
+  {       
+    if (!(data.length > 0)){
+        return false;
+    } 
+
+    var num_coords = data.length;
+
+    var X = 0.0;
+    var Y = 0.0;
+    var Z = 0.0;
+
+    for(i = 0; i < data.length; i++){
+        var lat = data[i][0] * Math.PI / 180;
+        var lon = data[i][1] * Math.PI / 180;
+
+        var a = Math.cos(lat) * Math.cos(lon);
+        var b = Math.cos(lat) * Math.sin(lon);
+        var c = Math.sin(lat);
+
+        X += a;
+        Y += b;
+        Z += c;
+    }
+
+    X /= num_coords;
+    Y /= num_coords;
+    Z /= num_coords;
+
+    var lon = Math.atan2(Y, X);
+    var hyp = Math.sqrt(X * X + Y * Y);
+    var lat = Math.atan2(Z, hyp);
+
+    var newX = (lat * 180 / Math.PI);
+    var newY = (lon * 180 / Math.PI);
+
+    return new Array(newX, newY);
+  },
+
   _csv2json: function (csv) {
     var json = {};
     json["type"]="FeatureCollection";
@@ -135,17 +174,14 @@ L.GeoCSV = L.GeoJSON.extend({
       }
     }
 
-    var minLat = 0, maxLat = 0, minLng = 0, maxLng = 0;
+    var locations = [];
 
     for (var num_linea = 0; num_linea < csv.length; num_linea++) {
       var fields = csv[num_linea].trim().split(this.options.fieldSeparator)
         , lng = parseFloat(fields[titulos.indexOf(lngTitle)])
         , lat = parseFloat(fields[titulos.indexOf(latTitle)]);
       if (fields.length==titulos.length && lng<180 && lng>-180 && lat<90 && lat>-90) {
-        if (lat < minLat) minLat = lat;
-        if (lat > maxLat) maxLat = lat;
-        if (lng < minLng) minLng = lng;
-        if (lng > maxLng) maxLng = lng;
+        locations.push([lat, lng])
         if (this.options.colorIconsByColumn){
           var colorcolumnnum = parseFloat(fields[titulos.indexOf(this.options.colorIconsByColumn)])
           if (colorcolumnnum < this.options.colorColumnMin) this.options.colorColumnMin = colorcolumnnum;
@@ -166,10 +202,9 @@ L.GeoCSV = L.GeoJSON.extend({
         json["features"].push(feature);
       } 
     }
-
-    //lat = minLat + ((minLat + maxLat) / 2);
-    //lng = maxLng - ((maxLng - minLng) / 2);
-    //mapa.panTo(new L.LatLng(lat, lng));
+    
+    var center = this._GetCenterFromDegrees(locations)
+    mapa.panTo(new L.LatLng(center[0], center[1]));
 
     return json;
   }
