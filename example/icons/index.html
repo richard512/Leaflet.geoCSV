@@ -38,7 +38,6 @@
 			padding: 2%;
 			border: 1px solid #ccc;
 			background-color: #fff;
-			max-height: 400px;
 		}
 		#mapa {
 			max-height: 300px;
@@ -82,143 +81,17 @@
 			<button id="load">Load data</button>
 
 			<h2>CSV</h2>
-			<textarea id="csv">
-city	state	query	totalcount	medianPrice	latitude	longitude	population	peoplePerCount	minPrice	maxPrice	num1price	num2price	num3price	url
-billings	MT	midland%20cb	0		45.783298	-108.500999	108869	108869						https://billings.craigslist.org/search/sss?query=midland%20cb&sort=rel
-missoula	MT	midland%20cb	0		46.872101	-113.994003	69821	69821						https://missoula.craigslist.org/search/sss?query=midland%20cb&sort=rel
-greatfalls	MT	midland%20cb	0		47.500198	-111.301003	82278	82278						https://greatfalls.craigslist.org/search/sss?query=midland%20cb&sort=rel
-saltlakecity	UT	midland%20cb	0		40.760799	-111.889999	1153340	1153340						https://saltlakecity.craigslist.org/search/sss?query=midland%20cb&sort=rel
-wyoming	WY	midland%20cb	0		43.004002	-108.153999	586107	586107						https://wyoming.craigslist.org/search/sss?query=midland%20cb&sort=rel
-rapidcity	SD	midland%20cb	0		44.080502	-103.231003	67956	67956						https://rapidcity.craigslist.org/search/sss?query=midland%20cb&sort=rel
-siouxfalls	SD	midland%20cb	0		43.549999	-96.700302	183200	183200						https://siouxfalls.craigslist.org/search/sss?query=midland%20cb&sort=rel
-yakima	WA	midland%20cb	0		46.6022	-120.504997	93357	93357						https://yakima.craigslist.org/search/sss?query=midland%20cb&sort=rel
-kpr		midland%20cb	0											https://kpr.craigslist.org/search/sss?query=midland%20cb&sort=rel
-bend	OR	midland%20cb	0		44.0583	-121.314003	84080	84080						https://bend.craigslist.org/search/sss?query=midland%20cb&sort=rel
-eastoregon		midland%20cb	0											https://eastoregon.craigslist.org/search/sss?query=midland%20cb&sort=rel
-elko	NV	midland%20cb	0		40.832401	-115.763	20300	20300						https://elko.craigslist.org/search/sss?query=midland%20cb&sort=rel
-provo	UT	midland%20cb	0		40.233898	-111.657997	114801	114801						https://provo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-stgeorge		midland%20cb	0											https://stgeorge.craigslist.org/search/sss?query=midland%20cb&sort=rel
-eastidaho		midland%20cb	0											https://eastidaho.craigslist.org/search/sss?query=midland%20cb&sort=rel
-bozeman	MT	midland%20cb	0		45.679699	-111.039001	41660	41660						https://bozeman.craigslist.org/search/sss?query=midland%20cb&sort=rel
-montana		midland%20cb	0											https://montana.craigslist.org/search/sss?query=midland%20cb&sort=rel
-nd		midland%20cb	0											https://nd.craigslist.org/search/sss?query=midland%20cb&sort=rel
-fargo	ND	midland%20cb	0		46.877201	-96.789398	115863	115863						https://fargo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-duluth	MN	midland%20cb	0		46.783298	-92.1064	86238	86238						https://duluth.craigslist.org/search/sss?query=midland%20cb&sort=rel
-greenbay		midland%20cb	0											https://greenbay.craigslist.org/search/sss?query=midland%20cb&sort=rel
-cedarrapids		midland%20cb	0											https://cedarrapids.craigslist.org/search/sss?query=midland%20cb&sort=rel
-springfieldil		midland%20cb	1											https://springfieldil.craigslist.org/search/sss?query=midland%20cb&sort=rel
-charlestonwv		midland%20cb	0											https://charlestonwv.craigslist.org/search/sss?query=midland%20cb&sort=rel
-morgantown	WV	midland%20cb	0		39.629398	-79.9561	31073	31073						https://morgantown.craigslist.org/search/sss?query=midland%20cb&sort=rel
-maine		midland%20cb	0											https://maine.craigslist.org/search/sss?query=midland%20cb&sort=rel
-burlington	VT	midland%20cb	1		44.461201	-73.193703	42211	42211	40	40	40			https://burlington.craigslist.org/search/sss?query=midland%20cb&sort=rel
-albany	NY	midland%20cb	0		42.6525	-73.756699	98566	98566						https://albany.craigslist.org/search/sss?query=midland%20cb&sort=rel
-sfbay	CA	midland%20cb	0		37.5	-122.25	8840000	8840000						https://sfbay.craigslist.org/search/sss?query=midland%20cb&sort=rel
-newyork	NY	midland%20cb	0		40.714199	-74.006401	8491079	8491079						https://newyork.craigslist.org/search/sss?query=midland%20cb&sort=rel
-losangeles	CA	midland%20cb	1		34.0522	-118.242996	3928864	3928864	25	25	25			https://losangeles.craigslist.org/search/sss?query=midland%20cb&sort=rel
-chicago	IL	midland%20cb	6	10	41.849998	-87.650002	2722389	453732	10	325	10	50	70	https://chicago.craigslist.org/search/sss?query=midland%20cb&sort=rel
-houston	TX	midland%20cb	2	20	29.7631	-95.363098	2239558	1119779	20	25	20	25		https://houston.craigslist.org/search/sss?query=midland%20cb&sort=rel
-philadelphia	PA	midland%20cb	0		39.952202	-75.1642	1560297	1560297						https://philadelphia.craigslist.org/search/sss?query=midland%20cb&sort=rel
-phoenix	AZ	midland%20cb	5	25	33.448299	-112.072998	1537058	307412	25	80	1	25	35	https://phoenix.craigslist.org/search/sss?query=midland%20cb&sort=rel
-sanantonio	TX	midland%20cb	1		29.423901	-98.493301	1436697	1436697	35	35	35			https://sanantonio.craigslist.org/search/sss?query=midland%20cb&sort=rel
-sandiego	CA	midland%20cb	0		32.715302	-117.155998	1381069	1381069						https://sandiego.craigslist.org/search/sss?query=midland%20cb&sort=rel
-dallas	TX	midland%20cb	3	33000	32.783298	-96.800003	1281047	427016	13000	33000	13000	23000	33000	https://dallas.craigslist.org/search/sss?query=midland%20cb&sort=rel
-austin	TX	midland%20cb	0		30.266899	-97.742798	912791	912791						https://austin.craigslist.org/search/sss?query=midland%20cb&sort=rel
-jacksonville	FL	midland%20cb	1		30.3319	-81.6558	853382	853382	150	150	150			https://jacksonville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-indianapolis	IN	midland%20cb	1		39.768299	-86.158096	848788	848788	40	40	40			https://indianapolis.craigslist.org/search/sss?query=midland%20cb&sort=rel
-columbus	OH	midland%20cb	0		39.961102	-82.998901	835957	835957						https://columbus.craigslist.org/search/sss?query=midland%20cb&sort=rel
-charlotte	NC	midland%20cb	1		35.226898	-80.8433	809958	809958	100	100	100			https://charlotte.craigslist.org/search/sss?query=midland%20cb&sort=rel
-detroit	MI	midland%20cb	2	5	42.331402	-83.045799	680250	340125	5	20	5	20		https://detroit.craigslist.org/search/sss?query=midland%20cb&sort=rel
-elpaso	TX	midland%20cb	0		31.7586	-106.486	679036	679036						https://elpaso.craigslist.org/search/sss?query=midland%20cb&sort=rel
-seattle	WA	midland%20cb	5		47.6064	-122.331001	668342	133668	10	2500	10	20	80	https://seattle.craigslist.org/search/sss?query=midland%20cb&sort=rel
-denver	CO	midland%20cb	3	50	39.739201	-104.984001	663862	221287	20	50	1	20	50	https://denver.craigslist.org/search/sss?query=midland%20cb&sort=rel
-memphis	TN	midland%20cb	0		35.149399	-90.048897	656861	656861						https://memphis.craigslist.org/search/sss?query=midland%20cb&sort=rel
-boston	MA	midland%20cb	0		42.358299	-71.060303	655884	655884						https://boston.craigslist.org/search/sss?query=midland%20cb&sort=rel
-nashville	TN	midland%20cb	2	16990	36.165798	-86.784401	644014	322007	80	16990	80	16990		https://nashville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-baltimore	MD	midland%20cb	0		39.307999	-76.616997	622793	622793						https://baltimore.craigslist.org/search/sss?query=midland%20cb&sort=rel
-oklahomacity	OK	midland%20cb	3	150	35.467499	-97.516098	620602	206867	12	150	12	150		https://oklahomacity.craigslist.org/search/sss?query=midland%20cb&sort=rel
-portland	OR	midland%20cb	2	22500	45.523602	-122.675003	619360	309680	100	22500	100	22500		https://portland.craigslist.org/search/sss?query=midland%20cb&sort=rel
-lasvegas	NV	midland%20cb	1		36.174999	-115.136002	613599	613599	25	25	25			https://lasvegas.craigslist.org/search/sss?query=midland%20cb&sort=rel
-milwaukee	WI	midland%20cb	0		43.038898	-87.906403	599642	599642						https://milwaukee.craigslist.org/search/sss?query=midland%20cb&sort=rel
-albuquerque	NM	midland%20cb	0		35.0844	-106.651001	557169	557169						https://albuquerque.craigslist.org/search/sss?query=midland%20cb&sort=rel
-tucson	AZ	midland%20cb	1		32.221699	-110.926003	527972	527972	700	700	700			https://tucson.craigslist.org/search/sss?query=midland%20cb&sort=rel
-fresno	CA	midland%20cb	0		36.747799	-119.771004	515986	515986						https://fresno.craigslist.org/search/sss?query=midland%20cb&sort=rel
-sacramento	CA	midland%20cb	0		38.581699	-121.492996	485199	485199						https://sacramento.craigslist.org/search/sss?query=midland%20cb&sort=rel
-kansascity	MO	midland%20cb	1		39.099701	-94.5783	470800	470800	45	45	45			https://kansascity.craigslist.org/search/sss?query=midland%20cb&sort=rel
-atlanta	GA	midland%20cb	2	40	33.748901	-84.3881	456002	228001	40	40	40			https://atlanta.craigslist.org/search/sss?query=midland%20cb&sort=rel
-omaha	NE	midland%20cb	0		41.258598	-95.9375	446599	446599						https://omaha.craigslist.org/search/sss?query=midland%20cb&sort=rel
-raleigh	NC	midland%20cb	2		35.7719	-78.638901	439896	219948	20	20	20			https://raleigh.craigslist.org/search/sss?query=midland%20cb&sort=rel
-miami	FL	midland%20cb	0		25.773899	-80.193901	430332	430332						https://miami.craigslist.org/search/sss?query=midland%20cb&sort=rel
-minneapolis	MN	midland%20cb	3	100	44.98	-93.263603	407207	135736	25	100	25	40	100	https://minneapolis.craigslist.org/search/sss?query=midland%20cb&sort=rel
-tulsa	OK	midland%20cb	1		36.1539	-95.9925	399682	399682	18995	18995	18995			https://tulsa.craigslist.org/search/sss?query=midland%20cb&sort=rel
-cleveland	OH	midland%20cb	1		41.499401	-81.695602	389521	389521						https://cleveland.craigslist.org/search/sss?query=midland%20cb&sort=rel
-wichita	KS	midland%20cb	0		37.6922	-97.337196	388413	388413						https://wichita.craigslist.org/search/sss?query=midland%20cb&sort=rel
-neworleans	LA	midland%20cb	0		29.972799	-90.058998	384320	384320						https://neworleans.craigslist.org/search/sss?query=midland%20cb&sort=rel
-honolulu	HI	midland%20cb	0		21.311399	-157.796005	374701	374701						https://honolulu.craigslist.org/search/sss?query=midland%20cb&sort=rel
-bakersfield	CA	midland%20cb	0		35.373299	-119.017998	368759	368759						https://bakersfield.craigslist.org/search/sss?query=midland%20cb&sort=rel
-tampa	FL	midland%20cb	0		28	-82.449997	358699	358699						https://tampa.craigslist.org/search/sss?query=midland%20cb&sort=rel
-stlouis	MO	midland%20cb	8	5	38.627701	-90.242798	317419	39677	5	150	60	1	5	https://stlouis.craigslist.org/search/sss?query=midland%20cb&sort=rel
-lexington	KY	midland%20cb	1		37.988701	-84.477699	310797	310797	100	100	100			https://lexington.craigslist.org/search/sss?query=midland%20cb&sort=rel
-pittsburgh	PA	midland%20cb	2		40.440601	-79.996101	305412	152706	10	10	10			https://pittsburgh.craigslist.org/search/sss?query=midland%20cb&sort=rel
-stockton	CA	midland%20cb	0		37.957802	-121.290001	302389	302389						https://stockton.craigslist.org/search/sss?query=midland%20cb&sort=rel
-anchorage	AK	midland%20cb	0		61.196201	-149.886002	301010	301010						https://anchorage.craigslist.org/search/sss?query=midland%20cb&sort=rel
-cincinnati	OH	midland%20cb	1		39.1619	-84.456902	298165	298165	25	25	25			https://cincinnati.craigslist.org/search/sss?query=midland%20cb&sort=rel
-greensboro	NC	midland%20cb	0		36.072498	-79.792198	282586	282586						https://greensboro.craigslist.org/search/sss?query=midland%20cb&sort=rel
-toledo	OH	midland%20cb	0		41.663898	-83.555298	281031	281031						https://toledo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-lincoln	NE	midland%20cb	1		40.799999	-96.666702	272996	272996	30	30	30			https://lincoln.craigslist.org/search/sss?query=midland%20cb&sort=rel
-louisville	KY	midland%20cb	0		38.2542	-85.759399	262764	262764						https://louisville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-orlando	FL	midland%20cb	0		28.538099	-81.379402	262372	262372						https://orlando.craigslist.org/search/sss?query=midland%20cb&sort=rel
-buffalo	NY	midland%20cb	4	45	42.886398	-78.878601	258703	64676	45	45	45			https://buffalo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-fortwayne	IN	midland%20cb	0		41.1306	-85.128899	258522	258522						https://fortwayne.craigslist.org/search/sss?query=midland%20cb&sort=rel
-laredo	TX	midland%20cb	0		27.5061	-99.507202	252309	252309						https://laredo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-madison	WI	midland%20cb	2	85	43.073101	-89.4011	245691	122846	25	85	25	85		https://madison.craigslist.org/search/sss?query=midland%20cb&sort=rel
-norfolk	VA	midland%20cb	1		36.84	-76.269997	245428	245428			1			https://norfolk.craigslist.org/search/sss?query=midland%20cb&sort=rel
-lubbock	TX	midland%20cb	0		33.577801	-101.855003	243839	243839						https://lubbock.craigslist.org/search/sss?query=midland%20cb&sort=rel
-winstonsalem	NC	midland%20cb	0		36.099701	-80.2444	239269	239269						https://winstonsalem.craigslist.org/search/sss?query=midland%20cb&sort=rel
-reno	NV	midland%20cb	2	50	39.529701	-119.813004	236995	118498	35	50	35	50		https://reno.craigslist.org/search/sss?query=midland%20cb&sort=rel
-batonrouge	LA	midland%20cb	0		30.458099	-91.140198	228895	228895						https://batonrouge.craigslist.org/search/sss?query=midland%20cb&sort=rel
-richmond	VA	midland%20cb	0		37.5383	-77.461502	217853	217853						https://richmond.craigslist.org/search/sss?query=midland%20cb&sort=rel
-boise	ID	midland%20cb	1		43.613602	-116.202003	216282	216282	85	85	85			https://boise.craigslist.org/search/sss?query=midland%20cb&sort=rel
-spokane	WA	midland%20cb	1		47.658901	-117.425003	212052	212052	40	40	40			https://spokane.craigslist.org/search/sss?query=midland%20cb&sort=rel
-rochester	NY	midland%20cb	0		43.154701	-77.615799	209983	209983						https://rochester.craigslist.org/search/sss?query=midland%20cb&sort=rel
-modesto	CA	midland%20cb	0		37.639198	-120.996002	209286	209286						https://modesto.craigslist.org/search/sss?query=midland%20cb&sort=rel
-fayetteville	NC	midland%20cb	0		35.052502	-78.878601	203948	203948						https://fayetteville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-montgomery	AL	midland%20cb	0		32.366699	-86.300003	200481	200481						https://montgomery.craigslist.org/search/sss?query=midland%20cb&sort=rel
-shreveport	LA	midland%20cb	0		32.468102	-93.771103	198242	198242						https://shreveport.craigslist.org/search/sss?query=midland%20cb&sort=rel
-amarillo	TX	midland%20cb	1		35.221901	-101.831001	197254	197254	16995	16995	16995			https://amarillo.craigslist.org/search/sss?query=midland%20cb&sort=rel
-mobile	AL	midland%20cb	0		30.694201	-88.043098	194675	194675						https://mobile.craigslist.org/search/sss?query=midland%20cb&sort=rel
-huntsville	AL	midland%20cb	0		34.730301	-86.586098	188226	188226						https://huntsville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-tallahassee	FL	midland%20cb	0		30.438101	-84.2808	188107	188107						https://tallahassee.craigslist.org/search/sss?query=midland%20cb&sort=rel
-knoxville	TN	midland%20cb	1		35.960602	-83.920799	184281	184281	19500	19500	19500			https://knoxville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-brownsville	TX	midland%20cb	0		25.9014	-97.4972	183046	183046						https://brownsville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-worcester	MA	midland%20cb	0		42.262501	-71.802803	183016	183016						https://worcester.craigslist.org/search/sss?query=midland%20cb&sort=rel
-providence	RI	midland%20cb	5		41.8302	-71.409103	179154	35831						https://providence.craigslist.org/search/sss?query=midland%20cb&sort=rel
-chattanooga	TN	midland%20cb	0		35.045601	-85.3097	173778	173778						https://chattanooga.craigslist.org/search/sss?query=midland%20cb&sort=rel
-jackson	MS	midland%20cb	0		32.298599	-90.1847	171155	171155						https://jackson.craigslist.org/search/sss?query=midland%20cb&sort=rel
-springfield	MO	midland%20cb	1		37.215302	-93.298103	165378	165378	150	150	150			https://springfield.craigslist.org/search/sss?query=midland%20cb&sort=rel
-salem	OR	midland%20cb	0		44.9431	-123.033997	161637	161637						https://salem.craigslist.org/search/sss?query=midland%20cb&sort=rel
-eugene	OR	midland%20cb	1		44.0522	-123.085999	160561	160561	120	120	120			https://eugene.craigslist.org/search/sss?query=midland%20cb&sort=rel
-rockford	IL	midland%20cb	1		42.271099	-89.093903	149123	149123	25	25	25			https://rockford.craigslist.org/search/sss?query=midland%20cb&sort=rel
-clarksville	TN	midland%20cb	1		36.529701	-87.359398	146806	146806	35	35	35			https://clarksville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-savannah	GA	midland%20cb	0		32.050701	-81.103798	144352	144352						https://savannah.craigslist.org/search/sss?query=midland%20cb&sort=rel
-syracuse	NY	midland%20cb	0		43.0481	-76.147797	144263	144263						https://syracuse.craigslist.org/search/sss?query=midland%20cb&sort=rel
-dayton	OH	midland%20cb	0		39.7589	-84.191704	141003	141003						https://dayton.craigslist.org/search/sss?query=midland%20cb&sort=rel
-mcallen	TX	midland%20cb	0		26.2031	-98.229698	138596	138596						https://mcallen.craigslist.org/search/sss?query=midland%20cb&sort=rel
-killeen	TX	midland%20cb	1		31.116899	-97.727501	138154	138154	100	100	100			https://killeen.craigslist.org/search/sss?query=midland%20cb&sort=rel
-augusta	GA	midland%20cb	3		33.470798	-81.974998	136381	45460	8	8	8			https://augusta.craigslist.org/search/sss?query=midland%20cb&sort=rel
-columbia	SC	midland%20cb	1		34.000599	-81.035004	132067	132067						https://columbia.craigslist.org/search/sss?query=midland%20cb&sort=rel
-waco	TX	midland%20cb	0		31.5492	-97.1464	130194	130194						https://waco.craigslist.org/search/sss?query=midland%20cb&sort=rel
-charleston	SC	midland%20cb	0		32.776402	-79.931099	130113	130113						https://charleston.craigslist.org/search/sss?query=midland%20cb&sort=rel
-visalia	CA	midland%20cb	0		36.330299	-119.291	129281	129281						https://visalia.craigslist.org/search/sss?query=midland%20cb&sort=rel
-gainesville	FL	midland%20cb	0		29.6514	-82.324997	128460	128460						https://gainesville.craigslist.org/search/sss?query=midland%20cb&sort=rel
-topeka	KS	midland%20cb	0		39.048302	-95.677803	127215	127215						https://topeka.craigslist.org/search/sss?query=midland%20cb&sort=rel
-lafayette	LA	midland%20cb	1		30.2139	-92.029404	126066	126066	75	75	75			https://lafayette.craigslist.org/search/sss?query=midland%20cb&sort=rel
-</textarea>
+			<textarea id="csv">lat;lng;icon;popup
+48.8566;2.3522;http://joker-x.github.io/Leaflet.geoCSV/example/bankia/marcador-bankia.png;<a href="https://es.wikipedia.org/wiki/Par%C3%ADs">París</a>, capital de Francia
+40.4168;-3.7038;red.png;Madrid, capital de España<br><img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Bandera_de_Madrid.svg" width="100%" />
+41.9015;12.4608;blue.png;Roma, capital de Italia
+37.9837;23.7293;purple.png;Atenas, capital de Grecia</textarea>
 
 			<h2>Javascript</h2>
 			<textarea id="opciones">
 L.geoCsv(null,{
   firstLineTitles: true,
-  colorIconsByColumn: "population",
+  colorIconsByColumn: "peoplePerCount",
   onEachFeature: function (feature, layer) {
   	popuplines = []
   	for (i in feature.properties) {
@@ -244,8 +117,8 @@ L.geoCsv(null,{
 	    		colornum = feature.properties[geo_csv.options.colorIconsByColumn.toLowerCase()]
 	    		//console.log("colornum = ", colornum)
 	    		chunk1cutoff = (geo_csv.options.colorColumnMax - geo_csv.options.colorColumnMin) * 0.025
-	    		chunk2cutoff = (geo_csv.options.colorColumnMax - geo_csv.options.colorColumnMin) * 0.0125
-	    		chunk3cutoff = (geo_csv.options.colorColumnMax - geo_csv.options.colorColumnMin) * 0.00625
+	    		chunk2cutoff = (geo_csv.options.colorColumnMax - geo_csv.options.colorColumnMin) * 0.05
+	    		chunk3cutoff = (geo_csv.options.colorColumnMax - geo_csv.options.colorColumnMin) * 0.1
 	    		if (colornum <= chunk1cutoff){
 	    			iconfile = "greenDot.png"
 	    		} else if (colornum <= chunk2cutoff){
