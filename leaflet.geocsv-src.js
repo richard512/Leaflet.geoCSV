@@ -40,6 +40,27 @@ L.GeoCSV = L.GeoJSON.extend({
     L.GeoJSON.prototype.initialize.call (this, csv, options);
   },
 
+  _guessDelimiters: function(text, possibleDelimiters) {
+      return possibleDelimiters.filter(weedOut)[0];
+
+      function weedOut (delimiter) {
+          var cache = -1;
+          return text.split('\n').every(checkLength);
+
+          function checkLength (line) {
+              if (!line) {
+                  return true;
+              }
+
+              var length = line.split(delimiter).length;
+              if (cache < 0) {
+                  cache = length;
+              }
+              return cache === length && length > 1;
+          }
+      }
+  },
+
   addData: function (data) {
     if (typeof data === 'string') {
       //leemos titulos
@@ -50,6 +71,8 @@ L.GeoCSV = L.GeoJSON.extend({
         titulos = data[0];
         data.splice(0,1);
         data = data.join(this.options.lineSeparator);
+        this.options.fieldSeparator = this._guessDelimiters(data, ['\t', ';', ','])
+        console.log('Guessed delimiter = "' + this.options.fieldSeparator + '"')
         titulos = titulos.trim().split(this.options.fieldSeparator);
         for (var i=0; i<titulos.length; i++) {
           titulos[i] = this._deleteDoubleQuotes(titulos[i]);
@@ -87,35 +110,12 @@ L.GeoCSV = L.GeoJSON.extend({
     return cadena;
   },
 
-  _guessDelimiters: function(text, possibleDelimiters) {
-      return possibleDelimiters.filter(weedOut)[0];
-
-      function weedOut (delimiter) {
-          var cache = -1;
-          return text.split('\n').every(checkLength);
-
-          function checkLength (line) {
-              if (!line) {
-                  return true;
-              }
-
-              var length = line.split(delimiter).length;
-              if (cache < 0) {
-                  cache = length;
-              }
-              return cache === length && length > 1;
-          }
-      }
-  },
-
   _csv2json: function (csv) {
     var json = {};
     json["type"]="FeatureCollection";
     json["features"]=[];
     var titulos = this.options.titles;
 
-    this.options.fieldSeparator = this._guessDelimiters(csv, ['\t', ';', ','])
-    console.log('Guessed delimiter = "' + this.options.fieldSeparator + '"')
     csv = csv.split(this.options.lineSeparator);
 
     var latTitle = ""
